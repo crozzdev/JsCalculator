@@ -1,13 +1,43 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Vite App</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/main.js"></script>
-  </body>
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>JS Calculator - Vanilla</title>
+</head>
+
+<body>
+  <div id="calculator" class="app">
+    <div id="display"></div>
+    <div class="keyboard">
+      <!-- first row -->
+      <button id="clear" class="clear-btn" value="AC">AC</button>
+      <button id="divide" class="operations-btn" value="/">/</button>
+      <button id="multiply" class="operations-btn" value="x">x</button>
+      <!-- second row -->
+      <button id="seven" class="num-btn" value="7">7</button>
+      <button id="eight" class="num-btn" value="8">8</button>
+      <button id="nine" class="num-btn" value="9">9</button>
+      <button id="subtract" class="operations-btn" value="-">-</button>
+      <!-- third row -->
+      <button id="four" class="num-btn" value="4">4</button>
+      <button id="five" class="num-btn" value="5">5</button>
+      <button id="six" class="num-btn" value="6">6</button>
+      <button id="add" class="operations-btn" value="+">+</button>
+      <!-- fourth row -->
+      <button id="one" class="num-btn" value="1">1</button>
+      <button id="two" class="num-btn" value="2">2</button>
+      <button id="three" class="num-btn" value="3">3</button>
+      <!-- last row -->
+      <button id="zero" class="num-btn" value="0">0</button>
+      <button id="decimal" class="num-btn" value=".">.</button>
+      <!-- equal btn -->
+      <button id="equals" class="eq-btn" value="=">=</button>
+    </div>
+  </div>
+  <script type="module" src="/main.js"></script>
+</body>
+
 </html>
