@@ -4,39 +4,43 @@
 <head>
   <meta charset="UTF-8" />
   <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <link rel="stylesheet" href="style.css">
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>JS Calculator - Vanilla</title>
 </head>
 
 <body>
+  <h1 class="title">JavaScript Calculator</h1>
   <div id="calculator" class="app">
-    <div id="display"></div>
+    <div class="formulaScreen"></div>
+    <div id="display" class="outputScreen">0</div>
     <div class="keyboard">
       <!-- first row -->
-      <button id="clear" class="clear-btn" value="AC">AC</button>
-      <button id="divide" class="operations-btn" value="/">/</button>
-      <button id="multiply" class="operations-btn" value="x">x</button>
+      <button id="clear" class="btn clear-btn double-w" value="AC">AC</button>
+      <button id="divide" class="btn operations-btn" value="/">/</button>
+      <button id="multiply" class="btn operations-btn" value="x">x</button>
       <!-- second row -->
-      <button id="seven" class="num-btn" value="7">7</button>
-      <button id="eight" class="num-btn" value="8">8</button>
-      <button id="nine" class="num-btn" value="9">9</button>
-      <button id="subtract" class="operations-btn" value="-">-</button>
+      <button id="seven" class="btn num-btn" value="7">7</button>
+      <button id="eight" class="btn num-btn" value="8">8</button>
+      <button id="nine" class="btn num-btn" value="9">9</button>
+      <button id="subtract" class="btn operations-btn" value="-">-</button>
       <!-- third row -->
-      <button id="four" class="num-btn" value="4">4</button>
-      <button id="five" class="num-btn" value="5">5</button>
-      <button id="six" class="num-btn" value="6">6</button>
-      <button id="add" class="operations-btn" value="+">+</button>
+      <button id="four" class="btn num-btn" value="4">4</button>
+      <button id="five" class="btn num-btn" value="5">5</button>
+      <button id="six" class="btn num-btn" value="6">6</button>
+      <button id="add" class="btn operations-btn" value="+">+</button>
       <!-- fourth row -->
-      <button id="one" class="num-btn" value="1">1</button>
-      <button id="two" class="num-btn" value="2">2</button>
-      <button id="three" class="num-btn" value="3">3</button>
-      <!-- last row -->
-      <button id="zero" class="num-btn" value="0">0</button>
-      <button id="decimal" class="num-btn" value=".">.</button>
+      <button id="one" class="btn num-btn" value="1">1</button>
+      <button id="two" class="btn num-btn" value="2">2</button>
+      <button id="three" class="btn num-btn" value="3">3</button>
       <!-- equal btn -->
-      <button id="equals" class="eq-btn" value="=">=</button>
+      <button id="equals" class="btn eq-btn double-h" value="=">=</button>
+      <!-- last row -->
+      <button id="zero" class="btn num-btn double-w" value="0">0</button>
+      <button id="decimal" class="btn num-btn" value=".">.</button>
     </div>
   </div>
+  <footer>Created with love by <em>CrozzDev</em></footer>
   <script type="module" src="/main.js"></script>
 </body>
 

@@ -1,3 +1,27 @@
+@import 'https://fonts.googleapis.com/css?family=Share+Tech+Mono';
+
+@font-face {
+  font-family: 'Digital';
+  src: url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.eot');
+  src: url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.eot?#iefix') format('embedded-opentype'),
+    url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.woff2') format('woff2'),
+    url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.woff') format('woff'),
+    url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.ttf') format('truetype'),
+    url('//db.onlinewebfonts.com/t/8e22783d707ad140bffe18b2a3812529.svg#Digital-7') format('svg');
+}
+
+
+:root {
+  --bg-grey: #dcdcdc;
+  --blue-operators: #4a90e2;
+  --white-numbers: #ffffff;
+  --blue-equal: #007acc;
+  --read-clear: #ff6f61;
+  --grey-numbers-text: #333333;
+  --black: #000000;
+
+}
+
 /* Css Reset june 2024 */
 
 * {
@@ -13,6 +37,11 @@
 
 body {
   min-height: 100dvh;
+  background-color: var(--bg-grey);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 
 input,
@@ -53,4 +82,99 @@ svg {
     scroll-behavior: auto !important;
     transition: none;
   }
+}
+
+/* custom styles */
+
+.title {
+  font-family: Share Tech Mono, monospace;
+  padding-bottom: 20px;
+}
+
+.app {
+
+  border: 2px solid #47476b;
+  padding: 10px;
+  background: black;
+  width: 320px;
+}
+
+.formulaScreen {
+  min-height: 20px;
+  font-family: digital;
+  font-size: 20px;
+  color: orange;
+  text-align: right;
+  vertical-align: text-top;
+  line-height: 20px;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.outputScreen {
+  font-size: 29px;
+  font-family: digital;
+  color: white;
+  text-align: right;
+  line-height: 35px;
+}
+
+.keyboard {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: repeat(5, 60px);
+  background-color: #dcdcdc;
+  border-radius: 10px;
+}
+
+.btn {
+
+  color: var(--grey-numbers-text);
+  user-select: none;
+  border: 1px solid black;
+  ;
+  background: #4d4d4d;
+  font-family: Share Tech Mono, monospace;
+  font-size: 20px;
+  cursor: default;
+  transition: transform 0.1s ease;
+}
+
+.btn:active {
+  transform: scale(0.95);
+  /* Slightly scale down the button when clicked */
+}
+
+.btn:hover {
+  background-color: gray;
+  color: white;
+}
+
+.num-btn {
+  background-color: var(--white-numbers);
+}
+
+.operations-btn {
+  background-color: var(--blue-operators);
+}
+
+.clear-btn {
+  background-color: var(--read-clear);
+
+}
+
+.eq-btn {
+  background-color: var(--blue-equal);
+}
+
+.btn.double-w {
+  grid-column: 1 / span 2;
+}
+
+.btn.double-h {
+  grid-row: span 2;
+}
+
+footer {
+  padding-top: 10px;
 }
