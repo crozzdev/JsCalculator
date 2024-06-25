@@ -13,54 +13,58 @@ const $equalsBtn = document.getElementById("equals");
 //numbers
 const $keyboardDiv = document.getElementById("keyboard");
 
-let formulaString = "";
+let formulaInput = "";
+let formulaOutput = "";
 
-const sum = (a, b) => a + b;
-const subtract = (a, b) => a - b;
-const multiply = (a, b) => a * b;
-const divide = (a, b) => a / b;
+const infixToFunction = {};
 
-$keyboardDiv.addEventListener("click", (event) => {
-  if (event.target.tagName === "BUTTON") {
-    const btnValue = event.target.value;
-    const isNumberBtn = event.target.className.includes("num-btn");
-    const isDecimalBtn = btnValue === ".";
-    const endsWithOperator = /[\+\-\*\/]$/.test(formulaString);
-    const lastNumberHasDecimal = /(\.\d*)$/.test(formulaString);
-    const startsWithZero = /^(0$|.*[\+\-\*\/]0$)/.test(formulaString);
+const getInput = (event) => {
+  const btnValue = event.target.value;
+  const isNumberBtn = event.target.className.includes("num-btn");
+  const isDecimalBtn = btnValue === ".";
+  const endsWithOperator = /[\+\-\*\/]$/.test(formulaInput);
+  const lastNumberHasDecimal = /(\.\d*)$/.test(formulaInput);
+  const startsWithZero = /^(0$|.*[\+\-\*\/]0$)/.test(formulaInput);
 
-    if ($displayDiv.innerText.length >= 22) {
-      $displayDiv.innerText = "DIGIT LIMIT MET";
-      setTimeout(() => {
-        $displayDiv.innerText = formulaString;
-      }, 1000);
+  if (isNumberBtn && !isDecimalBtn) {
+    if (btnValue === "0" && startsWithZero) {
+      // Prevent adding more zeros if it starts with a zero
       return;
+    } else if (formulaInput === "0" || /[\+\-\*\/]0$/.test(formulaInput)) {
+      // Replace the last '0' with the clicked number if it's a standalone zero or follows an operator
+      formulaInput = formulaInput.slice(0, -1) + btnValue;
+    } else {
+      formulaInput += btnValue;
     }
-
-    if (isNumberBtn && !isDecimalBtn) {
-      if (btnValue === "0" && startsWithZero) {
-        // Prevent adding more zeros if it starts with a zero
-        return;
-      } else if (formulaString === "0" || /[\+\-\*\/]0$/.test(formulaString)) {
-        // Replace the last '0' with the clicked number if it's a standalone zero or follows an operator
-        formulaString = formulaString.slice(0, -1) + btnValue;
-      } else {
-        formulaString += btnValue;
-      }
-      $displayDiv.innerText = formulaString;
-    } else if (isDecimalBtn && !lastNumberHasDecimal && !endsWithOperator) {
-      if (formulaString === "" || startsWithZero) {
-        // Append '0.' if formulaString is empty or ends with a standalone '0'
-        formulaString += "0.";
-      } else {
-        formulaString += ".";
-      }
-      $displayDiv.innerText = formulaString;
+  } else if (isDecimalBtn && !lastNumberHasDecimal && !endsWithOperator) {
+    if (formulaInput === "" || startsWithZero) {
+      // Append '0.' if formulaInput is empty or ends with a standalone '0'
+      formulaInput += "0.";
+    } else {
+      formulaInput += ".";
     }
   }
+};
 
+$keyboardDiv.addEventListener("click", (event) => {
   if (event.target.id === "clear") {
-    formulaString = "";
+    formulaInput = "";
     $displayDiv.innerText = "0";
+    $formulaScreenDiv.innerText = "";
+    return;
+  }
+
+  if ($displayDiv.innerText.length >= 22) {
+    $displayDiv.innerText = "DIGIT LIMIT MET";
+    setTimeout(() => {
+      $displayDiv.innerText = formulaInput;
+    }, 1000);
+    return;
+  }
+
+  if (event.target.tagName === "BUTTON") {
+    getInput(event);
+    $displayDiv.innerText = formulaInput;
+    $formulaScreenDiv.innerText = formulaInput;
   }
 });
