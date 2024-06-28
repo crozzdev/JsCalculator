@@ -14,41 +14,80 @@ const $equalsBtn = document.getElementById("equals");
 const $keyboardDiv = document.getElementById("keyboard");
 
 let formulaInput = "";
-let formulaOutput = "";
+let currentInput = "";
 
-const infixToFunction = {};
+const evalFormula = (formula) => {
+  try {
+    // Direct evaluation - consider using a safe math library for complex expressions
+    const result = eval(formula);
+    return result;
+  } catch (error) {
+    console.error("Error evaluating formula:", error);
+    return "Error"; // Return a user-friendly error message or handle as needed
+  }
+};
 
 const getInput = (event) => {
   const btnValue = event.target.value;
   const isNumberBtn = event.target.className.includes("num-btn");
+  const isOperatorBtn = event.target.className.includes("operations-btn");
   const isDecimalBtn = btnValue === ".";
   const endsWithOperator = /[\+\-\*\/]$/.test(formulaInput);
-  const lastNumberHasDecimal = /(\.\d*)$/.test(formulaInput);
+  const endsWithDecimal = /\.$/.test(formulaInput);
   const startsWithZero = /^(0$|.*[\+\-\*\/]0$)/.test(formulaInput);
 
-  if (isNumberBtn && !isDecimalBtn) {
-    if (btnValue === "0" && startsWithZero) {
-      // Prevent adding more zeros if it starts with a zero
+  if (isNumberBtn || isDecimalBtn) {
+    if (isDecimalBtn && currentInput.includes(".")) {
+      // If it's a decimal button and currentInput already has a decimal, do nothing
       return;
-    } else if (formulaInput === "0" || /[\+\-\*\/]0$/.test(formulaInput)) {
-      // Replace the last '0' with the clicked number if it's a standalone zero or follows an operator
-      formulaInput = formulaInput.slice(0, -1) + btnValue;
+    } else if (
+      startsWithZero &&
+      btnValue === "0" &&
+      !currentInput.includes(".")
+    ) {
+      // Prevent adding 0 if it's the first character or if it follows an operator directly, unless there's a decimal point
+      return;
+    } else if (endsWithOperator || currentInput === "") {
+      if (isDecimalBtn) {
+        currentInput = "0."; // Start with "0." for decimal if currentInput is empty
+      } else {
+        currentInput = btnValue; // Start fresh for numbers after an operator
+      }
     } else {
-      formulaInput += btnValue;
+      currentInput += btnValue; // Append the digit or decimal
     }
-  } else if (isDecimalBtn && !lastNumberHasDecimal && !endsWithOperator) {
-    if (formulaInput === "" || startsWithZero) {
-      // Append '0.' if formulaInput is empty or ends with a standalone '0'
-      formulaInput += "0.";
+    formulaInput += btnValue; // Always append to the formula
+    $displayDiv.innerText = currentInput;
+  } else if (isOperatorBtn) {
+    if (!endsWithOperator && !endsWithDecimal) {
+      formulaInput += btnValue; // Append the operator to the formula if not ending with an operator or decimal
+    } else if (endsWithDecimal) {
+      formulaInput = formulaInput.slice(0, -1) + btnValue; // Remove trailing decimal before adding operator
     } else {
-      formulaInput += ".";
+      // Handle consecutive operators, allowing '-' for negative numbers after an operator
+      if (
+        endsWithOperator &&
+        btnValue === "-" &&
+        !/[\+\-\*\/]{2}$/.test(formulaInput)
+      ) {
+        formulaInput += btnValue; // Allow '-' after an operator for negative numbers
+      } else if (endsWithOperator) {
+        // If the last character is an operator (excluding the negative number scenario), replace it with the current one
+        formulaInput = formulaInput.replace(/[\+\-\*\/]+$/, btnValue);
+      }
     }
+    currentInput = btnValue;
+    $displayDiv.innerText = currentInput;
+    currentInput = ""; // Reset current input since we're moving on to a new number
   }
+
+  // Update the display with the current input
 };
 
 $keyboardDiv.addEventListener("click", (event) => {
   if (event.target.id === "clear") {
     formulaInput = "";
+    currentInput = "";
     $displayDiv.innerText = "0";
     $formulaScreenDiv.innerText = "";
     return;
@@ -62,9 +101,18 @@ $keyboardDiv.addEventListener("click", (event) => {
     return;
   }
 
+  if (event.target.id === "equals") {
+    let resultFormula = "";
+    resultFormula = evalFormula(formulaInput);
+    $formulaScreenDiv.innerText = `${formulaInput}=${resultFormula}`;
+    $displayDiv.innerText = resultFormula;
+    formulaInput = `${resultFormula}`;
+    currentInput = `${resultFormula}`;
+    return;
+  }
+
   if (event.target.tagName === "BUTTON") {
     getInput(event);
-    $displayDiv.innerText = formulaInput;
     $formulaScreenDiv.innerText = formulaInput;
   }
 });
