@@ -5,3 +5,51 @@
     background-color: #dcdcdc;
     border-radius: 10px;
 }
+
+.btn {
+
+    color: var(--grey-numbers-text);
+    user-select: none;
+    border: 1px solid black;
+    ;
+    background: #4d4d4d;
+    font-family: Share Tech Mono, monospace;
+    font-size: 20px;
+    cursor: default;
+    transition: transform 0.1s ease;
+}
+
+.btn:active {
+    transform: scale(0.95);
+    /* Slightly scale down the button when clicked */
+}
+
+.btn:hover {
+    background-color: gray;
+    color: white;
+}
+
+.num-btn {
+    background-color: var(--white-numbers);
+}
+
+.operations-btn {
+    background-color: var(--blue-operators);
+}
+
+.clear-btn {
+    background-color: var(--read-clear);
+
+}
+
+.eq-btn {
+    background-color: var(--blue-equal);
+}
+
+.btn.double-w {
+    grid-column: 1 / span 2;
+}
+
+.btn.double-h {
+    grid-row: span 2;
+}
