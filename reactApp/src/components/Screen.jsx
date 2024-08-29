@@ -1,6 +1,10 @@
 /* eslint-disable react/prop-types */
 import "./Screen.css";
 
-export const Screen = ({ className, valueToDisplay }) => {
-  return <div className={`screen ${className}`}>{valueToDisplay}</div>;
+export const Screen = ({ id, className, valueToDisplay }) => {
+  return (
+    <div id={id} className={`screen ${className}`}>
+      {valueToDisplay}
+    </div>
+  );
 };

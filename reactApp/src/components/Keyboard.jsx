@@ -9,7 +9,7 @@ export function Keyboard({ operatorClick, eqClick, clearClick, numClick }) {
         let onClick = "";
         if (key === "clear") {
           onClick = clearClick;
-        } else if (key === "eq") {
+        } else if (key === "equals") {
           onClick = eqClick;
         } else if (className.includes("operations-btn")) {
           onClick = operatorClick;
