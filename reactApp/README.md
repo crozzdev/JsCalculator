@@ -1,6 +1,6 @@
 # JavaScript Calculator React Version
 
-This project is a Markdown Previewer built with React 18 and packaged with Vite. It allows you to calculate basic operations with numbers including decimals.
+This project is a Calcultator built with React 18 and packaged with Vite. It allows you to calculate basic operations with numbers including decimals.
 
 ## Project Structure
 
