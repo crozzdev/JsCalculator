@@ -1,8 +1,28 @@
-# React + Vite
+# JavaScript Calculator React Version
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This project is a Markdown Previewer built with React 18 and packaged with Vite. It allows you to calculate basic operations with numbers including decimals.
 
-Currently, two official plugins are available:
+## Project Structure
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+The project is structured as follows:
+
+- `src/App.jsx`: This is the main component of the application. It manages the state of calculator and the expanded component.
+- `src/components`: The modular components used to make the main app.
+
+## Getting Started
+
+To get started with this project:
+
+1. Clone the repository
+2. Make sure you have Node JS installed.
+3. Install the dependencies with `npm install`
+4. Start the development server with `npm run dev`
+
+## Usage
+
+Click on the digit buttons and perform the desired operations.
+
+## Contributing
+
+Contributions are welcome. Please open an issue or submit a pull request.
+
